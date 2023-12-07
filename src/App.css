@@ -1,0 +1,24 @@
+#root {
+  max-width: 1280px;
+  padding: 2rem;
+}
+
+.containerStyle {
+}
+
+.timesTwoRectangle {
+  margin-top: 10px;
+  border: 1px solid black;
+  text-align: center;
+  padding: 10px;
+  width: 6rem;
+}
+
+.button {
+  border: 1px solid black;
+  margin: 5px;
+}
+
+.green {
+  background-color: rgb(143, 218, 32);
+}
