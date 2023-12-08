@@ -22,3 +22,16 @@
 .green {
   background-color: rgb(143, 218, 32);
 }
+
+.taskDiv {
+  height: 100px;
+  width: 200px;
+  background-color: #fae3af;
+  margin: 10px 0;
+  border: 2px solid black;
+}
+
+.cloneDivContainer {
+  display: flex;
+  gap: 5px;
+}

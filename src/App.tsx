@@ -13,6 +13,9 @@ const App = () => {
     const [count2, setCount2] = useState(100);
     const [textSize, setTextSize] = useState(16);
     const [liveText, setLiveText] = useState(''); 
+    const colorDivRef = useRef<HTMLDivElement>(null);
+    const cloneDivRef = useRef<HTMLDivElement>(null);
+    const cornerDivRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (inputRef.current) {
@@ -58,6 +61,28 @@ const App = () => {
         setLiveText(e.target.value);
     };
 
+    const handleChangeColor = () => {
+      if (colorDivRef.current) {
+          colorDivRef.current.style.backgroundColor = 'gold';
+      }
+  };
+
+  const handleCloneDiv = () => {
+    if (cloneDivRef.current) {
+        const newDiv = cloneDivRef.current.cloneNode(true);
+        cloneDivRef.current.parentNode.insertBefore(newDiv, cloneDivRef.current.nextSibling);
+    }
+};
+
+const handleSendDivToCorner = () => {
+    if (cornerDivRef.current) {
+        cornerDivRef.current.style.position = 'absolute';
+        cornerDivRef.current.style.top = '0';
+        cornerDivRef.current.style.right = '0';
+        cornerDivRef.current.textContent = 'esmu stūrī';
+    }
+};
+
     return (
         <div className='containerStyle'>
             <input
@@ -78,6 +103,7 @@ const App = () => {
             {submittedText && <p>{submittedText}</p>}
             <button disabled={isPogaDisabled} className='button'>Poga</button>
             <br /><br />
+
             <button onClick={() => setCount(prevCount => prevCount + 1)} className='button green'>
                 Count: {count}
             </button>
@@ -85,6 +111,7 @@ const App = () => {
                 {count * 2}
             </div>
             <br />
+
             <div>
                 <button onClick={addSquare} className='button'>+</button>
                 <select value={selectedColor} onChange={(e) => setSelectedColor(e.target.value)}>
@@ -101,8 +128,8 @@ const App = () => {
                     <div key={index} style={{ width: '100px', height: '100px', backgroundColor: color, margin: '0 10px' }}></div>
                 ))}
             </div>
-
             <br />
+
             <div>
                 <button onClick={incrementCount} className='button'>+</button>
                 <button onClick={decrementCount} className='button'>-</button>
@@ -111,8 +138,8 @@ const App = () => {
             <div style={{ fontSize: `${textSize}px`, marginTop: '10px' }}>
                 Count: {count2}
             </div>
-
             <br />
+
             <input
                 type="text"
                 placeholder="Type here..."
@@ -120,6 +147,21 @@ const App = () => {
                 onChange={handleLiveInputChange}
             />
             <div>{liveText}</div>
+            <br />
+
+            <div ref={colorDivRef} className='taskDiv'></div>
+            <button onClick={handleChangeColor} className='button'>Change color</button>
+            <br />
+
+            <div className='cloneDivContainer'>
+                <div ref={cloneDivRef} className='taskDiv'></div>
+            </div>
+            <button onClick={handleCloneDiv} className='button'>Clone div</button>
+            <br />
+            
+            <div ref={cornerDivRef} className='taskDiv'></div>
+            <button onClick={handleSendDivToCorner} className='button'>Send div to corner</button>
+
         </div>
     );
 };
